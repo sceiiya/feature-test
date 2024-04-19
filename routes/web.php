@@ -25,7 +25,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/vid', 'VideoController@index');
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/login', 'Auth\LoginController@login');
+Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+
 // Route::get('/generate-pdf', 'PDFController@generatePDF');
+
+//? PDF ROutes
+Route::get('/pdf/ping', [PDFController::class, 'ping']);
+Route::post('/pdf/upload', [PDFController::class, 'upload'])->name('upload-pdf');
+Route::get('/pdf/file-upload', [PDFController::class, 'uploadView']);
+Route::get('/pdf/stamp', [PDFController::class, 'stamp']);
+
 Route::get('/generate-pdf', [PDFController::class, 'generatePDF']);
 
 require __DIR__.'/auth.php';
